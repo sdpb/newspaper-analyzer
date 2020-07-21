@@ -12,6 +12,12 @@ subjectivity.
 python3 scraper.py <NEWSPAPER URL> <AMOUNT OF NEWS> <NEWSPAPER'S LANGUAGE>
 ```
 
+To see language options and general help to know more about the script usage
+
+```bash
+python3 scraper.py [-h | --help]
+```
+
 ### Example
 
 ```bash
