@@ -16,5 +16,3 @@ class NewsItem:
             obj = obj.translate(from_lang=lang, to='en')
         self.article_score = obj.sentiment.polarity
         self.article_subjectivity = obj.sentiment.subjectivity
-
-
