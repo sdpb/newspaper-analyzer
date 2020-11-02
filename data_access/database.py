@@ -27,7 +27,7 @@ historial = metadata.tables['historial']
 historial'''
 
 
-def save_db(quantity, url, type):
+def save_register(quantity, url, type):
     query = """INSERT INTO historial (url, quantity, filter) VALUES ( %s, %s, %s)"""
     record = (url, quantity, type)
     connection.execute(query, record)

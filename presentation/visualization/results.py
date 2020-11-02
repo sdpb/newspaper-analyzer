@@ -5,7 +5,7 @@ from bussiness_logic.data_processing.parser import parsed_articles
 scored_news = []
 
 
-def exe(newspaper_url, amount):
+def execute_search(newspaper_url, amount):
     newspaper = init_newspaper(newspaper_url)
     # print('{} news were found in {}.\n'.format(newspaper.size(), newspaper_url))
     filtered_articles = filter_articles(
@@ -22,8 +22,8 @@ def score_news():
         aux.append(_.article_title)
         aux.append(f'{round(score, 3)} {process_score(score)}')
         aux.append(f'{round(_.article_subjectivity, 3)}')
-        copia = aux.copy()
-        scored_news.append(copia)
+        copy = aux.copy()
+        scored_news.append(copy)
         aux.clear()
 
 
