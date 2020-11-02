@@ -2,6 +2,7 @@ from presentation.visualization.results import scored_news
 from presentation.vars.arguments import set_language
 from presentation.visualization import results
 from bussiness_logic.data_processing import filters
+from data_access.database import save_db, retreive_data
 import py_cui
 
 
@@ -58,6 +59,9 @@ class App:
         filters.filterNews(scored_news, type)
         show_news()
 
+        save_db(news_number, url, type)
+        print("Algunas búsquedas recientes:")
+        retreive_data()
         #print(str(self.form_results))
 
 
