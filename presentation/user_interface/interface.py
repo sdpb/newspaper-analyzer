@@ -1,11 +1,12 @@
 from presentation.visualization.results import scored_news
 from presentation.vars.arguments import set_language
 from presentation.visualization import results
+from bussiness_logic.data_processing import filters
 import py_cui
 
 
 def show_news():
-    for _ in scored_news:
+    for _ in filters.filtered_list:
         print(_)
 
 
@@ -54,6 +55,7 @@ class App:
         type = self.form_results['type']
         set_language(language)
         results.exe(url, news_number)
+        filters.filterNews(scored_news, type)
         show_news()
 
         #print(str(self.form_results))
