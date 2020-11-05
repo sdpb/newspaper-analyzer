@@ -11,6 +11,11 @@ def show_news():
         print(_)
 
 
+def show_nonfiltered_news():
+    for _ in scored_news:
+        print(_)
+
+
 class App:
 
     def __init__(self, master):
@@ -24,7 +29,7 @@ class App:
         self.master.run_on_exit(self.show_form_results)
 
         # Simple button that opens form popup
-        self.master.add_button('Open Form', 1, 1, command=self.open_form)
+        self.master.add_button('Buscar', 1, 1, command=self.open_form)
 
     def save_form_results(self, form_output):
         """Callback function for form popup, simply saves results to instance variable
@@ -48,8 +53,7 @@ class App:
                                     callback=self.save_form_results)
 
     def show_form_results(self):
-        """Helper function called on exit. Prints form results
-        """
+
         news_number = int(self.form_results['quantity'])
         url = self.form_results['url']
         language = self.form_results['language']
@@ -57,12 +61,16 @@ class App:
         set_language(language)
         results.execute_search(url, news_number)
         filters.filterNews(scored_news, type)
-        show_news()
+
+        if type == '':
+            show_nonfiltered_news()
+        else:
+            show_news()
 
         save_register(news_number, url, type)
         print("Algunas búsquedas recientes:")
         retreive_data()
-        #print(str(self.form_results))
+        # print(str(self.form_results))
 
 
 # Create the UI
