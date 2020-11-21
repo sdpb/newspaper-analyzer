@@ -18,19 +18,19 @@ def execute_search(newspaper_url, amount):
 def score_news():
     aux = []
     for _ in parsed_articles:
-        score = _.article_score
-        aux.append(_.article_title)
+        score = _.get_score()
+        aux.append(_.get_title())
         aux.append(f'{round(score, 3)} {process_score(score)}')
-        aux.append(f'{round(_.article_subjectivity, 3)}')
+        aux.append(f'{round(_.get_subjectivity(), 3)}')
         copy = aux.copy()
         scored_news.append(copy)
         aux.clear()
 
 
 def process_score(score):
-    if -0.4 <= score <= 0.4:
+    if -0.15 < score < 0.15:
         return 'neutral'
-    elif score > 0.4:
+    elif score > 0.15:
         return 'positive'
-    elif score < -0.4:
+    elif score < -0.15:
         return 'negative'

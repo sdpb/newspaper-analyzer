@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+
+
 from presentation.vars import arguments
 from presentation.visualization import results
 from presentation.user_interface import interface

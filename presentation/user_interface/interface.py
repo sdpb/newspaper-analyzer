@@ -1,5 +1,5 @@
 from presentation.visualization.results import scored_news
-from presentation.vars.arguments import set_language
+from presentation.vars.arguments import set_origin_language, set_target_language
 from presentation.visualization import results
 from bussiness_logic.data_processing import filters
 from data_access.database import save_register, retreive_data
@@ -47,27 +47,29 @@ class App:
         # Required fields will need to be populated before submission
         # The callback function is called with a single parameter - a dict of fields -> user inputs
         self.master.show_form_popup('Newspaper parameters',
-                                    ['url', 'quantity', 'language', 'type'],
-                                    required=['url', 'language'],
+                                    ['url', 'quantity', 'origin language', 'target language', 'type'],
+                                    required=['url', 'origin language'],
 
                                     callback=self.save_form_results)
 
     def show_form_results(self):
-
-        news_number = int(self.form_results['quantity'])
+        quantity = self.form_results['quantity']
+        news_number = int(quantity) if quantity else None
         url = self.form_results['url']
-        language = self.form_results['language']
-        type = self.form_results['type']
-        set_language(language)
+        origin_language = self.form_results['origin language']
+        target_language = self.form_results['target language']
+        sentimental_type = self.form_results['type']
+        set_origin_language(origin_language)
+        set_target_language(target_language)
         results.execute_search(url, news_number)
-        filters.filterNews(scored_news, type)
+        filters.filterNews(scored_news, sentimental_type)
 
-        if type == '':
+        if sentimental_type == '':
             show_nonfiltered_news()
         else:
             show_news()
 
-        save_register(news_number, url, type)
+        save_register(news_number, url, sentimental_type)
         print("Algunas búsquedas recientes:")
         retreive_data()
         # print(str(self.form_results))

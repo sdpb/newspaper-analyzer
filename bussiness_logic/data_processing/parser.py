@@ -1,5 +1,6 @@
 from presentation.vars import arguments
 from bussiness_logic.scraper.NewsItem import NewsItem
+from .translateDecorator import TranslateDecorator
 import re
 
 parsed_articles = []
@@ -16,4 +17,12 @@ def filter_articles(raw_articles, root_url):
 
 
 def parse_articles(filtered_articles):
-    parsed_articles.extend([NewsItem(_, arguments.LANGUAGE) for _ in filtered_articles])
+    news_items = [NewsItem(_) for _ in filtered_articles]
+    for _ in news_items:
+        print(f'NI {_}')
+    if arguments.TARGET_LANGUAGE != 'en':
+        news_items = [TranslateDecorator(_) for _ in news_items]
+    for _ in news_items:
+        print(f'TD {_}')
+    parsed_articles.extend(news_items)
+
