@@ -18,11 +18,6 @@ def filter_articles(raw_articles, root_url):
 
 def parse_articles(filtered_articles):
     news_items = [NewsItem(_) for _ in filtered_articles]
-    for _ in news_items:
-        print(f'NI {_}')
-    if arguments.TARGET_LANGUAGE != 'en':
+    if arguments.ORIGIN_LANGUAGE != arguments.TARGET_LANGUAGE:
         news_items = [TranslateDecorator(_) for _ in news_items]
-    for _ in news_items:
-        print(f'TD {_}')
     parsed_articles.extend(news_items)
-

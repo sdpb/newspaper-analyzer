@@ -14,9 +14,9 @@ class NewsItem:
         self.article_text = parsed_article.text
         self.article_summary = parsed_article.summary
         self.article_picture = parsed_article.top_image
-        obj = TextBlob(parsed_article.summary)
-        if self.origin_language != self.target_language:
-            obj = obj.translate(from_lang=self.origin_language, to=self.target_language)
+        obj = TextBlob(self.article_summary)
+        if self.origin_language != 'en':
+            obj = obj.translate(from_lang=self.origin_language, to='en')
         self.article_score = obj.sentiment.polarity
         self.article_subjectivity = obj.sentiment.subjectivity
 
@@ -32,5 +32,5 @@ class NewsItem:
     def get_score(self):
         return self.article_score
 
-    def get_subjetivity(self):
+    def get_subjectivity(self):
         return self.article_subjectivity

@@ -48,7 +48,7 @@ class App:
         # The callback function is called with a single parameter - a dict of fields -> user inputs
         self.master.show_form_popup('Newspaper parameters',
                                     ['url', 'quantity', 'origin language', 'target language', 'type'],
-                                    required=['url', 'origin language'],
+                                    required=['url', 'origin language', 'target language'],
 
                                     callback=self.save_form_results)
 
