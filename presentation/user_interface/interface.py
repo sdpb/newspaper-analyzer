@@ -1,8 +1,10 @@
 from presentation.visualization.results import scored_news
-from presentation.vars.arguments import set_origin_language, set_target_language
-from presentation.visualization import results
 from bussiness_logic.data_processing import filters
 from data_access.database import save_register, retreive_data
+from presentation.vars.arguments import set_origin_language, set_target_language
+from presentation.visualization import results
+
+
 import py_cui
 
 

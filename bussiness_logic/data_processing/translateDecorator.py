@@ -1,14 +1,16 @@
 from nltk.util import transitive_closure
 from googletrans import Translator
+from textblob import TextBlob
+
 from presentation.vars import arguments
 
 
 class TranslateDecorator:
 
     def __init__(self, news_item):
-        self.title = news_item.get_title()
-        self.text = news_item.get_text()
-        self.summary = news_item.get_summary()
+        self.title = translate_text(news_item.get_title())
+        self.text = translate_text(news_item.get_text())
+        self.summary = translate_text(news_item.get_summary())
 
         self.score = news_item.get_score()
         self.subjectivity = news_item.get_subjectivity()
@@ -20,18 +22,16 @@ class TranslateDecorator:
         return f'{self.title}'
 
     def get_title(self):
-        text = str(self.title)
-        print()
-        #return text
-        return translate_text(text)
+        return self.title
+        
 
     def get_text(self):
-        text = self.text
-        return translate_text(text)
+        return self.text
+        #return translate_text(text)
 
     def get_summary(self):
-        text = self.summary
-        return translate_text(text)
+        return self.summary
+        #return translate_text(text)
 
     def get_score(self):
         return self.score
@@ -41,7 +41,8 @@ class TranslateDecorator:
 
 
 def translate_text(text):
-    translator = Translator()
-    return translator.translate(text,src=arguments.ORIGIN_LANGUAGE,dest=arguments.TARGET_LANGUAGE).text
+    text = TextBlob(text)
+    text = text.translate(from_lang=arguments.ORIGIN_LANGUAGE, to=arguments.TARGET_LANGUAGE)
+    return str(text)
 
-x = 'https://www.nytimes.com'
+
