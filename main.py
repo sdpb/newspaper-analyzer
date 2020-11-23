@@ -5,6 +5,7 @@ from presentation.visualization import results
 from presentation.visualization.results import scored_news
 from bussiness_logic.data_processing import TemplateFilters, filters
 
+# from presentation.user_interface import interface
 from presentation.user_interface import interface
 
 
@@ -36,4 +37,5 @@ if __name__ == '__main__':
     else:
         show_news()
     '''
+    #interface
     interface

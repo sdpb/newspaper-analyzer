@@ -1,6 +1,6 @@
 from presentation.vars import arguments
 from bussiness_logic.scraper.NewsItem import NewsItem
-from .translateDecorator import TranslateDecorator
+from bussiness_logic.scraper.translateDecorator import TranslateDecorator
 import re
 
 parsed_articles = []

@@ -17,8 +17,12 @@ class NewsItem:
         obj = TextBlob(self.article_summary)
         if self.origin_language != 'en':
             obj = obj.translate(from_lang=self.origin_language, to='en')
-        self.article_score = obj.sentiment.polarity
-        self.article_subjectivity = obj.sentiment.subjectivity
+
+        self.article_score = round(obj.sentiment.polarity, 3)
+        self.article_subjectivity = round(obj.sentiment.subjectivity, 3)
+
+    def __str__(self):
+        return f'{self.article_title}'
 
     def get_title(self):
         return self.article_title

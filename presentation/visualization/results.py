@@ -18,6 +18,7 @@ def execute_search(newspaper_url, amount):
 def score_news():
     aux = []
     for _ in parsed_articles:
+        """
         score = _.get_score()
         aux.append(_.get_title())
         aux.append(f'{round(score, 3)} {process_score(score)}')
@@ -25,6 +26,8 @@ def score_news():
         copy = aux.copy()
         scored_news.append(copy)
         aux.clear()
+        """
+        scored_news.append(_)
 
 
 def process_score(score):

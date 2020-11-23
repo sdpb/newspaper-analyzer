@@ -36,6 +36,4 @@ def retreive_data():
     query = """ SELECT * FROM historial """
     result = connection.execute(query)
     records = result.fetchall()
-    print("record")
-    for row in records:
-        print(row)
+    return records
