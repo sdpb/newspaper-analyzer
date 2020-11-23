@@ -1,18 +1,23 @@
-filtered_list = []
+from bussiness_logic.data_processing.neutralFilter import NeutralFilter
+from bussiness_logic.data_processing.negativeFilter import NegativeFilter
+from bussiness_logic.data_processing.positiveFilter import PositiveFilter
+from .TemplateFilters import AbstractFilter
 
 
-def filterNews(scored_articles, new_type):
-    if new_type == 'b':
-        filterAux('positive', scored_articles)
 
-    elif new_type == 'm':
-        filterAux('negative', scored_articles)
+def filter_type(abstract_filter: AbstractFilter):
+    abstract_filter.template_filter()
 
-    elif new_type == 'n':
-        filterAux('neutral', scored_articles)
+def filterNews(new_type):
+    if new_type == 'positive':
+        filter_type(PositiveFilter())
+
+    elif new_type == 'negative':
+        filter_type(NegativeFilter())
+        # filterAux('negative', scored_articles)
+
+    elif new_type == 'neutral':
+        filter_type(NeutralFilter())
+        # filterAux('neutral', scored_articles)
 
 
-def filterAux(type, scored_articles):
-    for _ in scored_articles:
-        if type in _[1]:
-            filtered_list.append(_)

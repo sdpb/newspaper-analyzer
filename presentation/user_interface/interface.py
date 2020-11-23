@@ -1,21 +1,12 @@
 from presentation.visualization.results import scored_news
-from bussiness_logic.data_processing import filters
+from bussiness_logic.data_processing import TemplateFilters, filters
 from data_access.database import save_register, retreive_data
-from presentation.vars.arguments import set_origin_language, set_target_language
+from presentation.vars import arguments
+from presentation.vars.arguments import set_origin_language, set_target_language, set_news_type
 from presentation.visualization import results
 
 
 import py_cui
-
-
-def show_news():
-    for _ in filters.filtered_list:
-        print(_)
-
-
-def show_nonfiltered_news():
-    for _ in scored_news:
-        print(_)
 
 
 class App:
@@ -63,8 +54,10 @@ class App:
         sentimental_type = self.form_results['type']
         set_origin_language(origin_language)
         set_target_language(target_language)
+        set_news_type(sentimental_type)
+
         results.execute_search(url, news_number)
-        filters.filterNews(scored_news, sentimental_type)
+        
 
         if sentimental_type == '':
             show_nonfiltered_news()
@@ -75,6 +68,17 @@ class App:
         print("Algunas búsquedas recientes:")
         retreive_data()
         # print(str(self.form_results))
+
+
+def show_news():
+    filters.filterNews(arguments.NEWS_TYPE)
+    for _ in TemplateFilters.filtered_list:
+        print(_)
+
+
+def show_nonfiltered_news():
+    for _ in scored_news:
+        print(_)
 
 
 # Create the UI
