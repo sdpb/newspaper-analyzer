@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from presentation.visualization.results import scored_news
+from presentation.visualization.results import scored_news, process_score
 from presentation.vars import arguments
 
 filtered_list = []
@@ -14,7 +14,8 @@ class AbstractFilter(ABC):
 
     def filterAux(type, scored_articles):
         for _ in scored_articles:
-            if type in _[1]:
+            score = process_score(_.get_score())
+            if type == score:
                 filtered_list.append(_)
 
     # These operations have to be implemented in subclasses.
@@ -22,3 +23,11 @@ class AbstractFilter(ABC):
     @abstractmethod
     def filter(self, news_type, scored_articles):
         pass
+
+'''def process_score(score):
+    if -0.15 < score < 0.15:
+        return 'neutral'
+    elif score > 0.15:
+        return 'positive'
+    elif score < -0.15:
+        return 'negative'''
