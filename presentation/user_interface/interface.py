@@ -16,7 +16,7 @@ class SosNoticiaUI:
 
         self.master = master
 
-        
+
 
         # The scrolled list cells that will contain our tasks in each of the three categories
         self.history_scroll_cell = self.master.add_scroll_menu(
@@ -33,7 +33,7 @@ class SosNoticiaUI:
         # Redo comment if history element is selected and enter is pressed
         self.history_scroll_cell.add_key_command(
             py_cui.keys.KEY_ENTER, self.redo_query)
-        
+
         self.news_items_scroll_cell.add_key_command(
             py_cui.keys.KEY_ENTER, self.get_new)
 
@@ -71,7 +71,7 @@ class SosNoticiaUI:
 
     def show_news_items(self):
 
-        
+
         self.get_news_items()
         self.news_items_scroll_cell.clear()
 
@@ -98,7 +98,7 @@ class SosNoticiaUI:
         self.form_results = form_output
         self.show_news_items()
         self.show_history()
-        
+
 
 
     def get_news_items(self):
@@ -114,7 +114,7 @@ class SosNoticiaUI:
         set_news_type(sentimental_type)
 
         results.execute_search(url, news_number)
-        
+
         save_register(news_number, url, sentimental_type)
 
 
@@ -146,7 +146,6 @@ root = py_cui.PyCUI(7, 6)
 root.set_title('SOS NOTICIA')
 root.toggle_unicode_borders()
 s = SosNoticiaUI(root)
-root.enable_logging()
 
 
 root.start()
